@@ -24,24 +24,23 @@ exports.getLogin = (req, res) => {
 exports.postLogin = (req, res) => {
     const username = req.body.username;
     const passwd = req.body.passwd;
-    console.log(username);
+    loggedIn = false;
     User.findOne({ where: { username: username } })
-    	.then(user => {
-    		if (!user) {
-    			return res.redirect('/login');
-    		}
-    		bcrypt
-    		.compare(passwd, user.passwd)
-    		.then(doMatch => {
-    			if (doMatch) {
-    				return res.redirect('/logged_in');
-    			}
-    			res.redirect('/login');
-    		})
-    		.catch(err => {
-    			console.log(err)
-    			res.redirect('/login');
-    		})
-    	})
-    	.catch(err => { console.log(err)})
+	.then(user => {
+		if (!user) {
+			return res.render('pages/login');
+		}
+		bcrypt
+		.compare(passwd, user.passwd)
+		.then(doMatch => {
+			if (doMatch) {
+				return res.render('pages/logged_in', { loggedIn: true , username: username });
+			}
+			return res.render('pages/login');
+		})
+		.catch(err => {
+			console.log(err)
+			return res.render('pages/login');
+		})
+	})
 }

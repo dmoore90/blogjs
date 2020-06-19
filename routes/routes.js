@@ -9,6 +9,6 @@ router.post('/', controller.postIndex);
 router.get('/login', controller.getLogin);
 router.post('/login', controller.postLogin);
 
-router.get('/logged_in', controller.postLogin);
+router.get('pages/logged_in', controller.postLogin);
 
 module.exports = router;
