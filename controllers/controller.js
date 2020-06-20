@@ -20,11 +20,15 @@ exports.postIndex = (req, res) => {
 exports.getLogin = (req, res) => {
 	res.render('pages/login.ejs');
 }
+loggedIn = false;
+exports.getLoggedIn = (req, res) => {
+    res.render('pages/logged_in.ejs');
+}
 
 exports.postLogin = (req, res) => {
     const username = req.body.username;
     const passwd = req.body.passwd;
-    loggedIn = false;
+    loggedIn = true;
     User.findOne({ where: { username: username } })
 	.then(user => {
 		if (!user) {
@@ -34,13 +38,15 @@ exports.postLogin = (req, res) => {
 		.compare(passwd, user.passwd)
 		.then(doMatch => {
 			if (doMatch) {
-				return res.render('pages/logged_in', { loggedIn: true , username: username });
+                loggedIn = true;
+				return res.redirect('/logged_in');
 			}
-			return res.render('pages/login');
+			return res.redirect('/login');
 		})
 		.catch(err => {
 			console.log(err)
-			return res.render('pages/login');
+			return res.render('/login');
 		})
 	})
 }
+
