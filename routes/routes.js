@@ -10,7 +10,7 @@ router.get('/', controller.getIndex);
 router.get('/login', controller.getLogin);
 
 // retrieves logged in page
-router.get('/logged_in', controller.getLoggedIn);
+router.get('/profile', controller.getLoggedIn);
 
 // Home page and signup page
 router.post('/', controller.postIndex);
@@ -18,5 +18,7 @@ router.post('/', controller.postIndex);
 // Login page redirects to logged in ejs page
 router.post('/login', controller.postLogin);
 
+//Logout route
+router.post('/logout', controller.postLogout);
 
 module.exports = router;

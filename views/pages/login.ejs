@@ -6,6 +6,9 @@
 
 <body>
 	<p>Login</p>
+	<% if (typeof msg != undefined) { %>
+	<p><%= msg %></p>
+	<% } %>
   	<form action="/login" method="POST">
     	<label for="username">username: </label>
     	<input id="username" type="text" name="username">
