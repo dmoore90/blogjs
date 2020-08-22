@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 const bcrypt = require('bcrypt');
 
@@ -10,13 +11,18 @@ exports.getLogin = (req, res) => {
 	res.render('pages/login.ejs', {msg: null});
 };
 
-exports.getLoggedIn = (req, res, next) => {
+exports.getLoggedIn = (req, res) => {
     if (req.session.user) {
-        return res.render('pages/profile.ejs', {username: req.session.user.username})
+    	const userid = req.session.user.id;
+    	const uname = req.session.user.username;
+    	Post.findAll({ where: { userId: userid }})
+    		.then(posts => {
+    			res.render('pages/profile.ejs', {page_user: uname, posts: posts})
+    		})
+    		
     } else {
-    	return res.render('pages/profile.ejs', {username: null});
+    	res.render('pages/profile.ejs', {page_user: null});
     }
-    res.render('pages/profile.ejs');
 };
 
 exports.postIndex = (req, res) => {
@@ -64,4 +70,16 @@ exports.postLogout = (req, res) => {
 	req.session.destroy(err => {
 		res.redirect('/');
 	})
+}
+
+exports.postBlogPost = (req, res, next) => {
+	const blogpost = req.body.content;
+	const currentuserId = req.session.user.id;
+	Post.create({content: blogpost, userId: currentuserId})
+		.then(result => {
+			return res.redirect('/profile');
+		})
+		.catch(err => {
+			console.log(err);
+		})
 }

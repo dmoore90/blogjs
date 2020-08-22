@@ -5,12 +5,22 @@
 </head>
 <body>
 	<h1>Profile Page</h1>
-	<% if (typeof username != undefined && username != null) { %>
-	<p><%= username %></p>
+	<% if (typeof page_user != undefined && page_user != null) { %>
+	<p><%= page_user %></p>
 	<p>Logout:</p>
 	<form action="/logout" method="post">
 		<button type="submit">Logout</button>
 	</form>
+	<h1>What's on your mind?</h1>
+	<form action="/blog_post" method="post">
+		<input type=text name="content" id="content">
+		<button type="submit">save</button>
+	</form>
+		<% if(posts.length > 0) { %>
+			<% for(let post of posts) { %>
+				<ul><%= post.content %></ul>
+			<% } %>
+		<% } %>
 	<% } else { %>
 		<p>You are not logged in.</p>
 		<form action="/login" method="get">
