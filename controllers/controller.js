@@ -83,3 +83,42 @@ exports.postBlogPost = (req, res, next) => {
 			console.log(err);
 		})
 }
+
+exports.getUpdatePost = (req, res, next) => {
+	const pid = req.params.postId;
+	Post.findByPk(pid)
+	.then(post => {
+		if (!post) {
+			return res.redirect('/profile');
+		}
+		res.render("pages/update_post.ejs", {
+			post: post
+		})
+	})
+	.catch(err => {
+		console.log(err);
+	})
+}
+
+exports.postUpdatePost = (req, res, next) => {
+	const pid = req.body.postId;
+	const updatedCont = req.body.content;
+	Post.findByPk(pid)
+	.then(post => {
+		post.content = updatedCont;
+		return post.save();
+	})
+	.then(result => {
+		res.redirect('/profile');
+	})
+	.catch(err => console.log(err));
+}
+
+exports.postDeletePost = (req, res, next) => {
+	const pid = req.body.postId;
+	Post.destroy({ where: { id: pid }})
+	.then(result => {
+		res.redirect('/profile');
+	})
+	.catch(err => { console.log(err) })
+}

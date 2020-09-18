@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>INDEX</title>
+</head>
+<body>
+
+	<h1>Update Post</h1>
+	<form action="/update_post" method="POST">
+		<input type="text" value="<%= post.content %>" id="content" name="content">
+		<input type="hidden" value="<%= post.id %>" name="postId">
+		<input type="submit">
+	</form>
+
+	<form action="/delete_post" method="POST">
+		<input type="hidden" value="<%= post.id %>" name="postId">
+		<button class="btn" type="submit">delete</button>
+	</form>
+
+</body>
+</html>
