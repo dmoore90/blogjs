@@ -1,0 +1,46 @@
+body {
+	background-color: #86b3fc;
+	margin: 0;
+}
+
+.navbar {
+	background-color: blue;
+	overflow: auto;
+	top: 0;
+	width:100%;
+	position: fixed;
+
+}
+
+.navbar h1 {
+	float: left;
+	margin-left: 2%;
+	border: none;
+	margin-top: 35px;
+	font-size: 25px;
+	color: white;
+}
+
+.navbar p {
+  float: right;
+  color: white;
+  text-align: center;
+  margin-right: 16px;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.centerform {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+.regtitle h2 {
+	position: fixed;
+	right: 20%;
+	top: -50%;
+}

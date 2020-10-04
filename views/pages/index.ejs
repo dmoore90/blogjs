@@ -1,21 +1,31 @@
 <html>
 
 <head>
-
+    <%- include('../partials/head') %>
 </head>
 
 <body>
-	<p>Register</p>
+    <header>
+        <%- include('../partials/nav') %>
+    </header>
+    <div class="centerform">
+	<div class="regtitle">
+        <h2>Register</h2>
+    </div>
   	<form action="/" method="POST">
-    	<label for="username">username: </label>
-    	<input id="username" type="text" name="username">
-    	<label for="passwd">password: </label>
-    	<input id="passwd" type="text" name="passwd">    	
-    	<input type="submit" value="submit">
+    	<ul>
+            <label for="username">username: </label>
+            <input id="username" type="text" name="username"></ul>
+    	<ul>
+            <label for="passwd">password: </label>
+            <input id="passwd" type="text" name="passwd">    	
+    	</ul>
+        <ul>
+            <input type="submit" value="submit">
+        </ul>
 	</form>
+    </div>
 
-	<p>Login:</p>
-	<input type="button" onclick="location.href='/login';" value="login" />
 </body>
 
 </html>
