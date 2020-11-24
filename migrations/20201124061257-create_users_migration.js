@@ -9,7 +9,18 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true,
         },
-
+        first_name: {
+          type: Sequelize.STRING(35),
+          allowNull: false
+        },
+        last_name: {
+          type: Sequelize.STRING(35),
+          allowNull: false
+        },
+        email: {
+          type: Sequelize.STRING(50),
+          allowNull: false
+        },
         username: {
           type: Sequelize.STRING(35),
           allowNull: false,
@@ -28,3 +39,4 @@ module.exports = {
       return queryInterface.dropTable('Users');
   }
 };
+

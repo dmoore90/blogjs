@@ -26,10 +26,16 @@ exports.getLoggedIn = (req, res) => {
 };
 
 exports.postIndex = (req, res) => {
+	const first_name = req.body.first_name;
+	const last_name = req.body.last_name;
+	const email = req.body.email;
     const username = req.body.username;
     const passwd = req.body.passwd;
     const hashedPassword = bcrypt.hashSync(passwd, 10);
     User.create({
+    	first_name: first_name,
+    	last_name: last_name,
+    	email: email,
         username: username,
         passwd: hashedPassword
     })

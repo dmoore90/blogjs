@@ -21,16 +21,27 @@
 
 const Sequelize = require('sequelize');
 
-const sequelize = require('../db/connection');
+const connection = require('../db/connection');
 
-const User = sequelize.define("Users", {
+const User = connection.define("Users", {
 	id: {
 		type: Sequelize.INTEGER(11),
 		allowNull: false,
 		autoIncrement: true,
 		primaryKey: true,
 	},
-
+    first_name: {
+        type: Sequelize.STRING(35),
+        allowNull: false
+	},
+    last_name: {
+    	type: Sequelize.STRING(35),
+        allowNull: false
+    },
+    email: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+    },
 	username: {
 		type: Sequelize.STRING(35),
 		allowNull: false,
