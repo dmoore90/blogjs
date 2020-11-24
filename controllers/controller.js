@@ -48,13 +48,7 @@ exports.postLogin = (req, res) => {
 		.compare(passwd, user.passwd)
 		.then(doMatch => {
 			if (doMatch) {
-				console.log("----");
-				console.log(user.id);
-				console.log("----")
 				req.session.user = user;
-				console.log("---");
-				console.log(req.session.user.username);
-				console.log("---")
 				return res.redirect('/profile');
 			}
 			return res.render('pages/login', {msg: "invalid password"});
