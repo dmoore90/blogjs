@@ -15,9 +15,11 @@ exports.getLoggedIn = (req, res) => {
     if (req.session.user) {
     	const userid = req.session.user.id;
     	const uname = req.session.user.username;
+    	const fname = req.session.user.first_name;
+    	const lname = req.session.user.last_name;
     	Post.findAll({ where: { userId: userid }})
     		.then(posts => {
-    			res.render('pages/profile.ejs', {page_user: uname, posts: posts})
+    			res.render('pages/profile.ejs', {page_user: uname, first_name: fname, last_name: lname, posts: posts})
     		})
     		
     } else {
