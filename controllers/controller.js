@@ -36,15 +36,19 @@ exports.postIndex = (req, res) => {
     const passwd2 = req.body.passwd2;
 
     if (passwd == passwd2) {
-	    const hashedPassword = bcrypt.hashSync(passwd, 10);
-    	User.create({
-	    	first_name: first_name,
-	    	last_name: last_name,
-	    	email: email,
-	        username: username,
-	        passwd: hashedPassword
-	    })
-	    res.redirect('/login')
+    	if (passwd.length >= 8 && passwd.length <= 16) {
+		    const hashedPassword = bcrypt.hashSync(passwd, 10);
+	    	User.create({
+		    	first_name: first_name,
+		    	last_name: last_name,
+		    	email: email,
+		        username: username,
+		        passwd: hashedPassword
+		    })
+		    res.redirect('/login')
+		} else {
+			return res.render('pages/index', {msg: "password must be between 8 and 16 characters"});
+		}
     } else {
     	return res.render('pages/index', {msg: "passwords do not match"});
     }
