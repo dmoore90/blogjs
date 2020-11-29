@@ -4,7 +4,7 @@ const Post = require('../models/Post');
 const bcrypt = require('bcrypt');
 
 exports.getIndex = (req, res) => {
-	res.render('pages/index.ejs')
+	res.render('pages/index.ejs', {msg: null})
 };
 
 exports.getLogin = (req, res) => {
@@ -33,15 +33,23 @@ exports.postIndex = (req, res) => {
 	const email = req.body.email;
     const username = req.body.username;
     const passwd = req.body.passwd;
-    const hashedPassword = bcrypt.hashSync(passwd, 10);
-    User.create({
-    	first_name: first_name,
-    	last_name: last_name,
-    	email: email,
-        username: username,
-        passwd: hashedPassword
-    })
-    res.redirect('/login');
+    const passwd2 = req.body.passwd2;
+
+    if (passwd == passwd2) {
+	    const hashedPassword = bcrypt.hashSync(passwd, 10);
+    	User.create({
+	    	first_name: first_name,
+	    	last_name: last_name,
+	    	email: email,
+	        username: username,
+	        passwd: hashedPassword
+	    })
+	    res.redirect('/login')
+    } else {
+    	return res.render('pages/index', {msg: "passwords do not match"});
+    }
+    
+    // res.redirect('/login');
 };
 
 exports.postLogin = (req, res) => {

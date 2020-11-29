@@ -12,6 +12,9 @@
 	<div class="regtitle">
         <h2>Register</h2>
     </div>
+    <% if (typeof msg != undefined) { %>
+        <p><%= msg %></p>
+    <% } %>
   	<form action="/" method="POST">
         <ul>
             <label for="first_name">First Name: </label>
@@ -32,6 +35,10 @@
             <label for="passwd">password: </label>
             <input id="passwd" type="text" name="passwd">    	
     	</ul>
+        <ul>
+            <label for="passwd2">password confirmation: </label>
+            <input id="passwd2" type="text" name="passwd2">
+        </ul>
         <ul>
             <input type="submit" value="submit">
         </ul>
